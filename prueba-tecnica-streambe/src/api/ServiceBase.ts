@@ -5,7 +5,7 @@ export default abstract class ServiceBase {
 
     constructor(endpoint: string){
         this.client = axios.create({
-            baseURL: 'https://www.mockachino.com' + endpoint,
+            baseURL: process.env.REACT_APP_URL_BASE + endpoint,
         })
     }
 }

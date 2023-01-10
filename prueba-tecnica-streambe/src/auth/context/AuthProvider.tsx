@@ -27,13 +27,14 @@ export const AuthProvider = ({children}) => {
 
     const login = async (params = {}) => {
 
-      // const user = {params}
-      const user = await getLogin()
-        console.log(user);
+      const user = {params}
+      
+      // const user = await getLogin()
+      //   console.log(user);
 
       const action = {
         type: types.login,
-        payload: user
+        payload: user.params
       }
 
       localStorage.setItem('user', JSON.stringify(user));

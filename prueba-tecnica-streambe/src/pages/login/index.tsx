@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../../context/notification";
 import { LoginValidate } from "../../utils/validateForm";
-import { AuthContext } from '../../auth/context/AuthContext';
+import { AuthContext } from "../../auth/context/AuthContext";
 import { getLogin } from "../../hooks/useLogin";
 // import { getLogin } from "../../api/loginAction";
 
@@ -16,11 +16,9 @@ type LoginType = {
 };
 
 export const LoginPage: React.FC<{}> = () => {
-
-  const {login} = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   // console.log(valContext);
-  
 
   const navigate = useNavigate();
   const { getError, getSuccess } = useNotification();
@@ -44,15 +42,22 @@ export const LoginPage: React.FC<{}> = () => {
         // getSuccess(JSON.stringify(loginData));
         // login()
         // const response = await getLogin();
-        if (loginData.username !== 'tom.manchini@yopmail.com' || loginData.password !== 'Test12345@') {
-          return getError('Usuario o password incorrecto');
+        if (
+          loginData.username !== "tom.manchini@yopmail.com" ||
+          loginData.password !== "Test12345@"
+        ) {
+          return getError("Usuario o password incorrecto");
         }
 
-        
-        
-
-        login(loginData)
-        navigate('/', {replace: true})
+        debugger;
+        const user = await getLogin();
+        console.log(user.access_token);
+        if (user.access_token !== undefined) {
+          login(user);
+          navigate("/", { replace: true });
+        } else {
+          getError("Error de servidor. Vuelva a intentar más tarde");
+        }
       })
       .catch((error) => {
         getError(error.message);

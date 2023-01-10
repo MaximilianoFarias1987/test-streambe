@@ -5,7 +5,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../auth";
 
 import { useNotification } from "../../context/notification";
 import { getUsers } from '../../hooks/useAllUsers';
@@ -14,7 +15,10 @@ export const HomePage: React.FC<{}> = () => {
     const {getError, getSuccess} = useNotification();
     const [users, setUser] = useState([]);
     const [birthday, setBirthDay] = useState();
-    const responseGetUsers = getUsers();
+
+    const { user } = useContext(AuthContext);
+
+    const responseGetUsers = getUsers(user.access_token, user.token_type);
 
     const resolveUsers = async () => {
        const result = await responseGetUsers

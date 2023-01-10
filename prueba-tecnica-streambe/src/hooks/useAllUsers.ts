@@ -1,8 +1,8 @@
 import Service from '../api/userAction'
 
-export const getUsers = async() => {
+export const getUsers = async(token: string, tokenType: string) => {
     try {
-        const {data} = await Service.getUsers();
+        const {data} = await Service.getUsers(token, tokenType);
         console.log(data);
         
         return data;
