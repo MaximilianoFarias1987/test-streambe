@@ -1,11 +1,7 @@
-
-
 import React, { useReducer } from 'react'
 import { authReducer } from './authReducer'
 import { AuthContext } from './AuthContext'
 import { types } from './types/types'
-import { getLogin } from '../../hooks/useLogin'
-// import { getLogin } from '../../api/loginAction'
 
 const initialState = {
     logged: false,
@@ -25,16 +21,11 @@ export const AuthProvider = ({children}) => {
 
     const [authState, dispatch ] = useReducer(authReducer, initialState, init);
 
-    const login = async (params = {}) => {
-
-      const user = {params}
-      
-      // const user = await getLogin()
-      //   console.log(user);
+    const login = async (user) => {
 
       const action = {
         type: types.login,
-        payload: user.params
+        payload: user
       }
 
       localStorage.setItem('user', JSON.stringify(user));
