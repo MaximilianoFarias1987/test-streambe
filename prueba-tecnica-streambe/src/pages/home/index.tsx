@@ -81,7 +81,7 @@ export const HomePage: React.FC<{}> = () => {
   };
 
   return (
-    <Container sx={{ mt: 2 }} maxWidth="xl">
+    <Container sx={{ mt: 2 }} maxWidth="lg">
       <Grid container>
         <Grid item>
           <Typography variant="h4">Dashboard</Typography>
@@ -111,7 +111,7 @@ export const HomePage: React.FC<{}> = () => {
         <Grid item lg={12} md={12} sm={12} xs={12}>
           {users.length > 0 ? (
             <TableContainer>
-              <Table >
+              <Table>
                 <TableHead>
                   <TableRow sx={{ bgcolor: "#474444" }}>
                     <TableCell align="center">NAME</TableCell>
@@ -180,17 +180,22 @@ export const HomePage: React.FC<{}> = () => {
               <CircularProgress />
             </Grid>
           )}
-          {filteredandpagination().length > 0 ? (
-            <Stack spacing={2}>
-              <Pagination
-                style={{ marginTop: 20 }}
-                count={countPage}
-                color="primary"
-                disabled={search ? true : false}
-                onChange={handleChangePagination}
-              />
-            </Stack>
-          ) : null}
+          <Grid container alignItems='center' justifyContent='center'>
+          <Grid item>
+            {filteredandpagination().length > 0 ? (
+              <Stack spacing={2}>
+                <Pagination
+                  style={{ marginTop: 20 }}
+                  count={countPage}
+                  color="primary"
+                  disabled={search ? true : false}
+                  onChange={handleChangePagination}
+                />
+              </Stack>
+            ) : null}
+          </Grid>
+          </Grid>
+          
         </Grid>
       </Grid>
     </Container>
